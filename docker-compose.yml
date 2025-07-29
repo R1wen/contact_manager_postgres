@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres
+    image: postgres:alpine
     container_name: contact_postgres
     restart: always
     environment:
