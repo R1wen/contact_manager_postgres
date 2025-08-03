@@ -57,4 +57,4 @@ Suis les instructions dans le terminal pour gérer tes contacts.
 
 ## Auteur
 
-Komlan Erwin
+Komlan Erwin OKE
