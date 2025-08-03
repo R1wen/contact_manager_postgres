@@ -35,9 +35,14 @@ def list_contact():
                 "SELECT * FROM contacts"
             )
             rows = cur.fetchall()
-            for row in rows:
+            for index, row in enumerate(rows):
                 id, nom, prenom, telephone = row
-                print(f"{id}. {nom} {prenom} | tel: {telephone}")
+                print(
+                    (
+                        f"{index + 1}. {nom} {prenom} | tel: {telephone}, "
+                        f"(ID réel: {id})"
+                    )
+                )
         conn.commit()
 
 

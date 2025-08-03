@@ -11,8 +11,8 @@ def operation(choix):
     match choix:
         case 1:
             nom = input("Nom : ").upper()
-            prenom = input("Prenom : ").capitalize()
-            telephone = input("Telephone : ")
+            prenom = input("Prenoms : ").title()
+            telephone = input("Telephone (avec indice: +228 xxxxx) : ")
             add_contact(nom, prenom, telephone)
             print("Contact enregistré avec succès")
         case 2:
