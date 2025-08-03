@@ -17,8 +17,9 @@ Une application Python en ligne de commande pour gérer une liste de contacts st
 
 1. Clone ce dépôt :
    ```sh
-   git clone https://github.com/ton-utilisateur/contact_manager_postgres.git
+   git clone https://github.com/R1wen/contact_manager_postgres
    cd contact_manager_postgres
+   code .
    ```
 
 2. Installe les dépendances :
