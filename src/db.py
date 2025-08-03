@@ -14,10 +14,10 @@ def get_connection():
     return conn
 
 
-if __name__ == "__main__":
-    try:
-        conn = get_connection()
-        print("Succes")
-        conn.close()
-    except Exception as e:
-        print("Echec : ", e)
+# if __name__ == "__main__":
+#     try:
+#         conn = get_connection()
+#         print("Succes")
+#         conn.close()
+#     except Exception as e:
+#         print("Echec : ", e)
