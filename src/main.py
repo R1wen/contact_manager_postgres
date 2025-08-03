@@ -1,21 +1,30 @@
-from contact import add_contact, create_table, list_contact
+from contact import add_contact, create_table, delete_contact, list_contact
+
+
+def supprimer_contact():
+    nom = input("Entrez le nom du contact à supprimer: ").upper()
+    delete_contact(nom)
+    print("Contact supprimé avec succès")
 
 
 def operation(choix):
     match choix:
         case 1:
-            nom = input("Nom : ")
-            prenom = input("Prenom : ")
+            nom = input("Nom : ").upper()
+            prenom = input("Prenom : ").capitalize()
             telephone = input("Telephone : ")
             add_contact(nom, prenom, telephone)
             print("Contact enregistré avec succès")
         case 2:
             list_contact()
+        case 3:
+            supprimer_contact()
 
 
 def main():
     create_table()
-    list_choix = ["Enregistrer un contact", "Afficher la liste des contacts"]
+    list_choix = ["Enregistrer un contact",
+                  "Afficher la liste des contacts", "Supprimer un contact"]
 
     print("***BIENVENU DANS LE GESTION DE CONTACT***")
     print("***CHOISISSEZ UNE OPTION***")

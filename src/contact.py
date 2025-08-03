@@ -39,3 +39,12 @@ def list_contact():
                 id, nom, prenom, telephone = row
                 print(f"{id}. {nom} {prenom} | tel: {telephone}")
         conn.commit()
+
+
+def delete_contact(nom: str):
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                "DELETE FROM contacts where nom = %s", (nom,)
+            )
+            conn.commit()
