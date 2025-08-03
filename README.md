@@ -19,17 +19,25 @@ Une application Python en ligne de commande pour gérer une liste de contacts st
    ```sh
    git clone https://github.com/R1wen/contact_manager_postgres
    cd contact_manager_postgres
-   code .
    ```
 
-2. Installe les dépendances :
+2. Crée et active un environnement virtuel :
+   ```sh
+   python -m venv venv
+   # Sous Windows :
+   venv\Scripts\activate
+   # Sous macOS/Linux :
+   source venv/bin/activate
+   ```
+
+3. Installe les dépendances :
    ```sh
    pip install -r requirements.txt
    ```
 
-3. Configure la base de données :
-   - Créer et modifier un fichier `.env` avec les variables suivantes:
-    ```sh
+4. Configure la base de données :
+   - Crée et modifie un fichier `.env` avec les variables suivantes :
+     ```sh
      DB_NAME=...
      DB_USER=...
      DB_PASSWORD=...
@@ -40,7 +48,7 @@ Une application Python en ligne de commande pour gérer une liste de contacts st
      POSTGRES_USER=...
      POSTGRES_PASSWORD=...
      ```
-     NB: Remplacer les "..." par vos identifiants que vous voulez utiliser
+     NB : Remplace les "..." par tes identifiants.
 
    - Tu peux lancer PostgreSQL avec Docker :
      ```sh
