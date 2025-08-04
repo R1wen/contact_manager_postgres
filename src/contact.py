@@ -53,3 +53,16 @@ def delete_contact(nom: str):
                 "DELETE FROM contacts where nom = %s", (nom,)
             )
             conn.commit()
+
+
+def update_contact(id: int, nom: str, prenom: str, telephone: str):
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                UPDATE contacts
+                SET nom = %s, prenom = %s, telephone = %s
+                WHERE id = %s
+                """, (nom, prenom, telephone, id)
+            )
+            conn.commit()
