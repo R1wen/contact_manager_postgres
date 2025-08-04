@@ -9,28 +9,53 @@ from contact import (
 )
 
 
+def ajouter_contact():
+    try:
+        nom = input("Nom : ").upper()
+        prenom = input("Prenoms : ").title()
+        telephone = input("Telephone (avec indice: +228 xxxxx) : ")
+        if not nom or not prenom or not telephone:
+            print("Tous les champs sont requis")
+            return
+
+        add_contact(nom, prenom, telephone)
+        print("Contact enregistré avec succès")
+    except Exception as e:
+        print("Une Erreur est survenue: ", e)
+
+
 def modifier_contact(id: int):
-    nom = input("Nouveau nom : ").upper()
-    prenom = input("Nouveau prenoms : ").title()
-    telephone = input("Nouveau numéro (avec indice: +228 xxxxx) : ")
-    update_contact(id, nom, prenom, telephone)
-    print("Contact modifié avec succès")
+    try:
+        nom = input("Nouveau nom : ").upper()
+        prenom = input("Nouveau prenoms : ").title()
+        telephone = input("Nouveau numéro (avec indice: +228 xxxxx) : ")
+        if not nom or not prenom or not telephone:
+            print("Tous les champs sont requis")
+            return
+
+        update_contact(id, nom, prenom, telephone)
+        print("Contact modifié avec succès")
+    except Exception as e:
+        print("Une Erreur est survenue: ", e)
 
 
 def supprimer_contact():
-    nom = input("Entrez le nom du contact à supprimer: ").upper()
-    delete_contact(nom)
-    print("Contact supprimé avec succès")
+    try:
+        nom = input("Entrez le nom du contact à supprimer: ").upper()
+        if not nom:
+            print("Nom manquant")
+            return
+
+        delete_contact(nom)
+        print("Contact supprimé avec succès")
+    except Exception as e:
+        print("Une Erreur est survenue: ", e)
 
 
 def operation(choix):
     match choix:
         case 1:
-            nom = input("Nom : ").upper()
-            prenom = input("Prenoms : ").title()
-            telephone = input("Telephone (avec indice: +228 xxxxx) : ")
-            add_contact(nom, prenom, telephone)
-            print("Contact enregistré avec succès")
+            ajouter_contact()
             time.sleep(3)
         case 2:
             print("\n***LISTE DE CONTACTS***")
@@ -41,7 +66,15 @@ def operation(choix):
             time.sleep(3)
         case 4:
             list_contact()
-            id = int(input("Quelle est l'ID du contact à modifier? "))
+            try:
+                id = int(input("Quelle est l'ID du contact à modifier? "))
+                if id <= 0:
+                    print("ID invalide")
+                    return
+            except ValueError:
+                print("Erreur: Veuillez entrez un nombre entier")
+                time.sleep(3)
+                return
             modifier_contact(id)
             time.sleep(3)
         case 5:
