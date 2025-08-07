@@ -41,12 +41,12 @@ def modifier_contact(id: int):
 
 def supprimer_contact():
     try:
-        nom = input("Entrez le nom du contact à supprimer: ").upper()
-        if not nom:
-            print("Nom manquant")
+        id = int(input("Entrez l'id du contact à supprimer: "))
+        if not id:
+            print("ID manquant")
             return
 
-        delete_contact(nom)
+        delete_contact(id)
         print("Contact supprimé avec succès")
     except Exception as e:
         print("Une Erreur est survenue: ", e)

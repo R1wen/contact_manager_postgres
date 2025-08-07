@@ -44,25 +44,28 @@ def list_contact():
                     "SELECT * FROM contacts"
                 )
                 rows = cur.fetchall()
-                for index, row in enumerate(rows):
+                contacts = []
+                for row in rows:
                     id, nom, prenom, telephone = row
-                    print(
-                        (
-                            f"{index + 1}. {nom} {prenom} | tel: {telephone}, "
-                            f"(ID réel: {id})"
-                        )
-                    )
+                    contacts.append({
+                        "id": id,
+                        "nom": nom,
+                        "prenom": prenom,
+                        "telephone": telephone
+                    })
                 conn.commit()
+                return contacts
             except Exception as e:
                 print("Erreur lors de l'affichage: ", e)
+                return []
 
 
-def delete_contact(nom: str):
+def delete_contact(id: int):
     with get_connection() as conn:
         with conn.cursor() as cur:
             try:
                 cur.execute(
-                    "DELETE FROM contacts where nom = %s", (nom,)
+                    "DELETE FROM contacts where id = %s", (id,)
                 )
                 conn.commit()
             except Exception as e:
