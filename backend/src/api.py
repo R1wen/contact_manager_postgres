@@ -2,9 +2,9 @@ from contact import (
     add_contact,
     create_table,
     delete_contact,
+    find_contact,
     list_contact,
     update_contact,
-    find_contact
 )
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -47,4 +47,4 @@ def edit_contact(id):
 
 if __name__ == "__main__":
     create_table()
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

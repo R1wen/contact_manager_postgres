@@ -1,0 +1,46 @@
+services:
+  postgres:
+    image: postgres:alpine
+    container_name: contact_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  flask_app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.api
+    container_name: contact_flask
+    restart: always
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_PORT: ${DB_PORT}
+    depends_on:
+      - postgres
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend/src:/app
+
+  frontend:
+    image: nginx:alpine
+    container_name: contact_frontend
+    restart: always
+    depends_on:
+      - flask_app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+
+volumes:
+  pgdata:
