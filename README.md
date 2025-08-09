@@ -1,6 +1,6 @@
 # Contact Manager Postgres
 
-Une application Python en ligne de commande pour gérer une liste de contacts stockée dans une base PostgreSQL.
+Une application Python (Flask) et frontend web pour gérer une liste de contacts stockée dans une base PostgreSQL.
 
 ## Fonctionnalités
 
@@ -11,10 +11,9 @@ Une application Python en ligne de commande pour gérer une liste de contacts st
 
 ## Prérequis
 
-- Python 3.10+
-- [Docker](https://www.docker.com/) (pour utiliser un conteneur PostgreSQL)
+- [Docker](https://www.docker.com/)
 
-## Installation
+## Installation et lancement
 
 1. Clone ce dépôt :
    ```sh
@@ -22,44 +21,30 @@ Une application Python en ligne de commande pour gérer une liste de contacts st
    cd contact_manager_postgres
    ```
 
-2. Crée et active un environnement virtuel :
-   ```sh
-   python -m venv venv
-   # Sous Windows :
-   venv\Scripts\activate
-   # Sous macOS/Linux :
-   source venv/bin/activate
-   ```
-
-3. Installe les dépendances :
-   ```sh
-   pip install -r requirements.txt
-   ```
-
-4. Configure la base de données :
+2. Configure la base de données :
    - Crée et modifie un fichier `.env` avec les variables suivantes :
      ```sh
      DB_NAME=...
      DB_USER=...
      DB_PASSWORD=...
-     DB_HOST=...
+     DB_HOST=postgres
      DB_PORT=...
      ```
-     NB : Remplace les "..." par tes identifiants.
+     NB : Remplace les "..." par les identifiants souhaités.
 
-   - Tu peux lancer PostgreSQL avec Docker :
-     ```sh
-     docker-compose up -d
-     ```
+3. Lance tous les services (PostgreSQL, API Flask, frontend) :
+   ```sh
+   docker-compose up --build -d
+   ```
+
+4. Accède à l'application :
+   - Frontend : [http://localhost:8080](http://localhost:8080)
+   - API : [http://localhost:5000](http://localhost:5000)
 
 ## Utilisation
 
-Lance l'application :
-```sh
-python src/main.py
-```
-
-Suis les instructions dans le terminal pour gérer tes contacts.
+- Utilise l'interface web pour gérer tes contacts.
+- Les données sont stockées
 
 ## Auteur
 
