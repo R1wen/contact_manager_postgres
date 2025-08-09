@@ -1,90 +1,221 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Contact Manager</title>
   </head>
-  <body>
-    <div class="list flex flex-col justify-center items-center">
-      <h1 class="flex justify-center m-10 font-bold text-2xl">
+  <body class="bg-gray-100">
+
+    <div class="flex flex-col items-center justify-center">
+      <h1 class="flex justify-center m-10 text-2xl font-bold">
         LISTE DES CONTACTS
       </h1>
-      <table class="table-auto w-[90%] border border-gray-300 rounded-lg">
-        <thead>
+      <table
+        class="table-auto w-[90%] border border-gray-300 rounded-lg bg-white shadow-md"
+      >
+        <thead class="bg-gray-200">
           <tr>
-            <th>Nom</th>
-            <th>Prenom</th>
-            <th>Numero</th>
-            <th>Modifier</th>
-            <th>Supprimer</th>
+            <th class="px-4 py-2">Nom</th>
+            <th class="px-4 py-2">Prénom</th>
+            <th class="px-4 py-2">Numéro</th>
+            <th class="px-4 py-2">Modifier</th>
+            <th class="px-4 py-2">Supprimer</th>
           </tr>
         </thead>
         <tbody>
-          <tr></tr>
         </tbody>
       </table>
     </div>
+
+    <!-- Formulaire d'ajout -->
     <div class="mt-10">
-      <form class="max-w-md mx-auto ">
+      <form
+        id="contactForm"
+        class="max-w-md p-6 mx-auto bg-white rounded-lg shadow-md"
+      >
+      <h2 class="text-xl font-bold">Ajouter Contact</h2>
         <div class="grid md:grid-cols-2 md:gap-6">
+          <!-- Nom -->
           <div class="relative z-0 w-full mb-5 group">
             <input
               type="text"
               name="nom"
               id="nom"
-              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
               required
             />
             <label
-              for="last_name"
-              class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              for="nom"
+              class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
               >Nom</label
             >
           </div>
+
+          <!-- Prénom -->
           <div class="relative z-0 w-full mb-5 group">
             <input
               type="text"
               name="prenom"
               id="prenom"
-              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
               required
             />
             <label
-              for="first_name"
-              class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              for="prenom"
+              class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
               >Prénom</label
             >
           </div>
         </div>
+
+        <!-- Sélecteur de pays et numéro -->
         <div class="grid md:grid-cols-2 md:gap-6">
+          <!-- Sélecteur de pays -->
+          <div class="relative z-0 w-full mb-5 group">
+            <select
+              id="country"
+              name="country"
+              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600"
+              required
+            >
+              <option value="">-- Choisir un pays --</option>
+            </select>
+          </div>
+
+          <!-- Numéro brut -->
           <div class="relative z-0 w-full mb-5 group">
             <input
               type="tel"
-              pattern="\+[0-9]{3} [0-9]{7}"
-              name="telephone"
-              id="telephone"
-              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              name="localNumber"
+              id="localNumber"
+              pattern="[0-9]{6,15}"
+              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
               required
             />
             <label
-              for="phone"
-              class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-              >Numéro (+22X XXXXXXXX)</label
+              for="localNumber"
+              class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >Numéro</label
             >
-          </div> 
+          </div>
         </div>
+
+        <!-- Bouton -->
         <button
           type="submit"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
         >
-          Submit
+          Ajouter
         </button>
       </form>
+    </div>
+
+    <!-- formulaire de modification -->
+    <div id="editModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-gray-500 bg-opacity-20">
+      <div class="w-full max-w-md p-8 mx-4 bg-white rounded-lg shadow-xl">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-xl font-bold">Modifier le contact</h2>
+          <button onclick="fermerModal()" class="text-2xl text-gray-500 hover:text-gray-700">&times;</button>
+        </div>
+        
+        <form id="editForm">
+          <div class="grid md:grid-cols-2 md:gap-6">
+            <!-- Nom -->
+            <div class="relative z-0 w-full mb-5 group">
+              <input
+                type="text"
+                name="editNom"
+                id="editNom"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" "
+                required
+              />
+              <label
+                for="editNom"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                >Nom</label
+              >
+            </div>
+
+            <!-- Prénom -->
+            <div class="relative z-0 w-full mb-5 group">
+              <input
+                type="text"
+                name="editPrenom"
+                id="editPrenom"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" "
+                required
+              />
+              <label
+                for="editPrenom"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                >Prénom</label
+              >
+            </div>
+          </div>
+
+          <!-- Sélecteur de pays et numéro -->
+          <div class="grid md:grid-cols-2 md:gap-6">
+            <!-- Sélecteur de pays -->
+            <div class="relative z-0 w-full mb-5 group">
+              <select
+                id="editCountry"
+                name="editCountry"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600"
+                required
+              >
+                <option value="">-- Choisir un pays --</option>
+                <option value="+228">Togo (+228)</option>
+                <option value="+229">Bénin (+229)</option>
+                <option value="+225">Côte d'Ivoire (+225)</option>
+                <option value="+221">Sénégal (+221)</option>
+                <option value="+33">France (+33)</option>
+              </select>
+            </div>
+
+            <!-- Numéro brut -->
+            <div class="relative z-0 w-full mb-5 group">
+              <input
+                type="tel"
+                name="editLocalNumber"
+                id="editLocalNumber"
+                pattern="[0-9]{6,15}"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" "
+                required
+              />
+              <label
+                for="editLocalNumber"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                >Numéro</label
+              >
+            </div>
+          </div>
+
+          <!-- Boutons -->
+          <div class="flex justify-end gap-4">
+            <button
+              type="button"
+              onclick="fermerModal()"
+              class="px-4 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-200"
+            >
+              Annuler
+            </button>
+            <button
+              type="submit"
+              class="px-4 py-2 text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300"
+            >
+              Sauvegarder
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <script src="script.js"></script>

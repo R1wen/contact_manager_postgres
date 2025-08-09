@@ -60,6 +60,29 @@ def list_contact():
                 return []
 
 
+def find_contact(id: int):
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            try:
+                cur.execute(
+                    "SELECT * FROM contacts WHERE id=%s", (id,)
+                )
+                row = cur.fetchone()
+                if row:
+                    id, nom, prenom, telephone = row
+                    contact = {
+                        "id": id,
+                        "nom": nom,
+                        "prenom": prenom,
+                        "telephone": telephone
+                    }
+                conn.commit()
+                return contact
+            except Exception as e:
+                print("Erreur lors de l'affichage: ", e)
+                return None
+
+
 def delete_contact(id: int):
     with get_connection() as conn:
         with conn.cursor() as cur:
