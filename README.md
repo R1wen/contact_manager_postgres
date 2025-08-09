@@ -19,10 +19,11 @@ Une application Python (Flask) et frontend web pour gérer une liste de contacts
    ```sh
    git clone https://github.com/R1wen/contact_manager_postgres
    cd contact_manager_postgres
+   code .
    ```
 
 2. Configure la base de données :
-   - Crée et modifie un fichier `.env` avec les variables suivantes :
+   - Crée et modifie un fichier `.env` à la racine avec les variables suivantes :
      ```sh
      DB_NAME=...
      DB_USER=...
